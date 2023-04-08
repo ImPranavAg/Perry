@@ -1,0 +1,35 @@
+{
+    "manifest_version": 3,
+    "name": "Perry",
+    "version": "1.0",
+    "description": "A chrome extension to help people with dyslexia and color blindness access web pages with more ease.",
+    "icons": { 
+      "16": "assets/images/perry_16px.png",
+      "48": "assets/images/perry_48px.png",
+      "128": "assets/images/perry_128px.png" 
+    },
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "background.service_worker": {
+      "scripts": ["background.js"]
+    },
+    "web_accessible_resources": [
+      {
+        "matches": ["<all_urls>"],
+        "resources": ["assets/*"]
+      }
+    ],
+    
+    "content_scripts": [
+      {
+        "matches": ["*://*/*"],
+        "all_frames": true,
+        "js": ["webpage-assets/js/content.js", "mark.js"],
+        "css": ["webpage-assets/css/styles.css"]
+      }
+    ],
+    "permissions": ["tabs", "activeTab"],
+    "host_permissions": ["http://*/*", "https://*/*"]
+}
+  
